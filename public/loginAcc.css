@@ -1,0 +1,119 @@
+/* General Styles */
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #212121;
+    color: #fff;
+}
+
+/* Left and Right Section Styling */
+#leftmain, #rightmain {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+#leftmain {
+    background: linear-gradient(135deg, #ff8c42, #ff3d00);
+}
+
+#rightmain {
+    background-color:#212121 ;
+    backdrop-filter: blur(10px);
+}
+
+/* Welcome Text Styling */
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    padding: 20px 40px;
+    border-radius: 12px;
+    color: #fff;
+    box-shadow: 0px 6px 15px rgba(255, 87, 34, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Login Form Styling */
+#login {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    box-shadow: 0px 6px 15px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+}
+
+#rightmain input {
+    width: 60%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background: #414141;
+    color: #fff;
+    outline: none;
+    text-align: center;
+}
+
+#rightmain input::placeholder {
+    color: #ddd;
+}
+
+#rightmain button {
+    width: 50%;
+    padding: 14px;
+    background: #ff5722;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 12px;
+}
+
+#rightmain button:hover {
+    background: #e64a19;
+}
+
+#rightmain p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+#rightmain a {
+    color: #ffccbc;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+#rightmain a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    #leftmain, #rightmain {
+        width: 100%;
+        height: 50vh;
+    }
+    #rightmain {
+        width: 90%;
+    }
+}

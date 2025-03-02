@@ -1,0 +1,142 @@
+/* General Styles */
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #212121;
+    color: #fff;
+}
+
+/* Left and Right Section Styling */
+#leftmain, #rightmain {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+#leftmain {
+    background: linear-gradient(135deg, #ff8c42, #ff3d00);
+    color: #212121;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#rightmain {
+    background: #212121;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 40px;
+}
+
+/* Welcome Text Styling */
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#name-fields {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+}
+
+#name-fields input {
+    width: 50%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background: #414141;
+    color: #fff;
+    outline: none;
+    text-align: center;
+}
+
+input {
+    width: 94%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background: #414141;
+    color: #fff;
+    outline: none;
+    text-align: center;
+}
+
+input::placeholder {
+    color: #aba7a7;
+}
+
+/* Button Styling */
+button {
+    width: 65%;
+    padding: 14px;
+    background: #ff5722;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 12px;
+}
+
+button:hover {
+    background: #e64a19;
+}
+
+/* Links and Text */
+p {
+    font-size: 14px;
+}
+
+a {
+    color: #ff5722;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    #leftmain, #rightmain {
+        width: 100%;
+        height: auto;
+        padding: 30px;
+    }
+    #name-fields {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #name-fields input {
+        width: 100%;
+    }
+    form {
+        width: 90%;
+    }
+}

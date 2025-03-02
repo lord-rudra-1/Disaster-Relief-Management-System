@@ -1,0 +1,126 @@
+/* Dark Theme General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #212121; /* Dark background */
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Navigation Bar */
+nav {
+    width: 100%;
+    background: #504f4f;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 10px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Volunteer Form Container */
+.volunteer {
+    background: #222; /* Darker box */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    width: 400px;
+    text-align: center;
+    margin-top: 40px; /* Space from navbar */
+}
+
+/* Form Inputs */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* First Name and Last Name Side by Side */
+.name-container {
+    display: flex;
+    gap: 15px;
+}
+
+.name-container input {
+    width: 50%;
+}
+
+/* Input Fields */
+form input,
+form select,
+textarea {
+    width: 93%;
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    transition: 0.3s;
+}
+
+/* Input Focus Effect */
+form input:focus,
+form select:focus,
+textarea:focus {
+    border-color: #00aaff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 170, 255, 0.8);
+}
+
+/* Larger Address Field */
+textarea {
+    height: 80px;
+    resize: none;
+}
+
+/* Select Dropdown Styling */
+form select {
+    cursor: pointer;
+}
+
+/* Submit Button */
+button {
+    background: #00aaff;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Button Hover Effect */
+button:hover {
+    background: #0088cc;
+}
+
+/* Responsive Design */
+@media (max-width: 450px) {
+    .volunteer {
+        width: 90%;
+    }
+    
+    .name-container {
+        flex-direction: column;
+    }
+
+    .name-container input {
+        width: 100%;
+    }
+}
