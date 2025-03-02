@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Form</title>
+    <link rel="stylesheet" href="volunteer.css">
+</head>
+<body>
+    <nav>
+        <a href="Home.html">Home</a>
+    </nav>
+    
+    <div class="volunteer">
+        <h3>Enter Volunteer Details</h3>
+        <form method="post" action="submit_form.php"> <!-- Change action as needed -->
+            <div class="name-container">
+                <input type="text" name="fname" id="fname" placeholder="First Name" required>
+                <input type="text" name="lname" id="lname" placeholder="Last Name" required>
+            </div>
+
+            <input type="number" name="contact" id="contact" placeholder="Contact" required>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+
+            <textarea name="address" id="address" placeholder="Address" required></textarea>
+
+            <select name="skills" id="skills" required>
+                <option value="" disabled selected>Select Your Skill</option>
+                <option value="swimming">Swimming & Water Safety</option>
+                <option value="first-aid">First Aid & CPR</option>
+                <option value="general-service">General Service</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
