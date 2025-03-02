@@ -81,6 +81,10 @@ app.get('/admin/access',async(req,res)=>{
     res.json(user);
 });
 
+app.get('/volunteer',(req,res)=>{
+    res.render("volunteer");
+})
+
 app.listen(5000,()=>{
     console.log("port listen at 5000");
 })
