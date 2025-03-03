@@ -1,3 +1,2 @@
 # Disaster-Relief-Management-System
-
-![ER Diagram](./dbms_cs208-er diagrams.drawio.png)
+<img src="./dbms_cs208-er diagrams.drawio.png" alt="ER Diagram" width="900">
