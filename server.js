@@ -3,11 +3,9 @@ const User = require('./models/userSchema');
 
 (async () => {
     try {
-      await sequelize.sync({ force: false }); // Set force: true to drop & recreate tables
-      console.log("User table created successfully!");
+        await sequelize.sync({ force: false });
+        console.log("Database synced successfully!");
     } catch (error) {
-      console.error("Error syncing database:", error);
-    } finally {
-      await sequelize.close();
+        console.error("Error syncing database:", error);
     }
-  })();
+})();
