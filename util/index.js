@@ -1,9 +1,13 @@
 const { Sequelize } = require('sequelize');
+require('dotenv').config();
 
-const sequelize = new Sequelize('project', 'root', 'kali',{
-    host: 'localhost',
-    dialect: 'mysql',
-    port:33061
+console.log("DB Config:", process.env.DB_NAME, process.env.USERNAME, process.env.PASS, process.env.HOST, process.env.DIALECT, process.env.PORT);
+
+
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.USERNAME, process.env.PASS,{
+    host: process.env.HOST,
+    dialect: process.env.DIALECT || 'mysql',
+    port:process.env.PORT
 });
 
 async function testConnection() {
@@ -17,3 +21,4 @@ async function testConnection() {
 testConnection();
 
 module.exports = sequelize;
+
