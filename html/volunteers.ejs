@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteers</title>
+    <link rel="stylesheet" href="/Home.css">
+</head>
+<body>
+    <h1>Volunteers</h1>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Skills</th>
+            <th>Availability</th>
+        </tr>
+        <% volunteers.forEach(volunteer => { %>
+        <tr>
+            <td><%= volunteer.name %></td>
+            <td><%= volunteer.contact %></td>
+            <td><%= volunteer.skills %></td>
+            <td><%= volunteer.availability ? 'Available' : 'Not Available' %></td>
+        </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

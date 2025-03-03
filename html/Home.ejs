@@ -3,25 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <link rel="stylesheet" href="/Home.css">
 </head>
 <body>
     <nav id="Nav">
-        <a href="Home.html">Home</a>
-        <a href="">About us</a>
-        <button type="submit">Donation</button>
+        <a href="/home">Home</a>
+        <a href="/donations">Donations</a>
+        <a href="/volunteers">Volunteers</a>
+        <a href="/resources">Resources</a>
+        <a href="/affected-areas">Affected Areas</a>
     </nav>
+    
     <h1>Welcome to Disaster Management System</h1>
+
     <div class="container">
-        <a type="button" class="box" id="volunteer" href="/volunteer">Volunteers</a>
-        <button type="button" class="box" id="resource">Resource Tracking</button>
-        <button type="button" class="box" id="donation">Donation Management</button>
-        <button type="button" class="box" id="affected">Affected Area Management</button>
+        <a class="box" id="volunteer" href="/volunteer">Volunteers</a>
+        <button class="box" id="resource">Resource Tracking</button>
+        <button class="box" id="donation">Donation Management</button>
+        <button class="box" id="affected">Affected Area Management</button>
+        <button class="box" id="displayTables" onclick="window.location.href='/fetch-all-tables'">Display All Tables</button>
     </div>
-    <div id="vol"></div>
+
+    <% if (showTables) { %>
+        <h2>Affected Areas</h2>
+        <table border="1">
+            <tr>
+                <th>Location</th>
+                <th>Disaster Type</th>
+                <th>Severity</th>
+                <th>Population</th>
+                <th>Casualties</th>
+            </tr>
+            <% data.affectedAreas.forEach(area => { %>
+            <tr>
+                <td><%= area.location %></td>
+                <td><%= area.disaster_type %></td>
+                <td><%= area.severity %></td>
+                <td><%= area.population %></td>
+                <td><%= area.casualties %></td>
+            </tr>
+            <% }) %>
+        </table>
+
+        <h2>Volunteers</h2>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Skills</th>
+            </tr>
+            <% data.volunteers.forEach(volunteer => { %>
+            <tr>
+                <td><%= volunteer.name %></td>
+                <td><%= volunteer.contact %></td>
+                <td><%= volunteer.skills %></td>
+            </tr>
+            <% }) %>
+        </table>
+
+        <h2>Donors</h2>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+            </tr>
+            <% data.donors.forEach(donor => { %>
+            <tr>
+                <td><%= donor.donor_name %></td>
+                <td><%= donor.contact %></td>
+            </tr>
+            <% }) %>
+        </table>
+
+        <h2>Donations</h2>
+        <table border="1">
+            <tr>
+                <th>Donor</th>
+                <th>Donation Type</th>
+                <th>Amount</th>
+            </tr>
+            <% data.donations.forEach(donation => { %>
+            <tr>
+                <td><%= donation.donor_id %></td>
+                <td><%= donation.donation_type %></td>
+                <td><%= donation.amount ? donation.amount : 'N/A' %></td>
+            </tr>
+            <% }) %>
+        </table>
+
+        <h2>Resources</h2>
+        <table border="1">
+            <tr>
+                <th>Category</th>
+                <th>Quantity</th>
+            </tr>
+            <% data.resources.forEach(resource => { %>
+            <tr>
+                <td><%= resource.category_id %></td>
+                <td><%= resource.quantity %></td>
+            </tr>
+            <% }) %>
+        </table>
+
+        <h2>Volunteer Assignments</h2>
+        <table border="1">
+            <tr>
+                <th>Volunteer</th>
+                <th>Task</th>
+                <th>Status</th>
+            </tr>
+            <% data.assignments.forEach(assignment => { %>
+            <tr>
+                <td><%= assignment.volunteer_id %></td>
+                <td><%= assignment.task %></td>
+                <td><%= assignment.status %></td>
+            </tr>
+            <% }) %>
+        </table>
+
+    <% } %>
+
 </body>
-
-<script src="Home_js.js"></script>
-
 </html>
