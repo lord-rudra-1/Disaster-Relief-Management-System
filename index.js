@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 require('./util'); // Ensure database connection
 
 // Import Models
@@ -99,7 +100,7 @@ app.post('/Signin', async (req, res) => {
 });
 
 /** ✅ Start Server **/
-const PORT = 5000;
+const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
