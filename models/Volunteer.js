@@ -7,6 +7,6 @@ const Volunteer = sequelize.define('Volunteer', {
     contact: { type: DataTypes.STRING, unique: true, allowNull: false },
     skills: { type: DataTypes.TEXT, allowNull: false },
     availability: { type: DataTypes.BOOLEAN, defaultValue: true }
-});
+}, { timestamps: false });
 
 module.exports = Volunteer;

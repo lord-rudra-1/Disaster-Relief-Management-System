@@ -10,6 +10,6 @@ const VolunteerAssignment = sequelize.define('VolunteerAssignment', {
     task: { type: DataTypes.STRING, allowNull: false },
     assigned_date: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     status: { type: DataTypes.ENUM('Pending', 'Ongoing', 'Completed'), defaultValue: 'Pending' }
-});
+}, { timestamps: false });
 
 module.exports = VolunteerAssignment;

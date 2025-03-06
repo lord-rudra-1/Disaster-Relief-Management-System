@@ -8,6 +8,6 @@ const Resource = sequelize.define('Resource', {
     category_id: { type: DataTypes.INTEGER, references: { model: ResourceCategory, key: 'category_id' } },
     quantity: { type: DataTypes.INTEGER, allowNull: false },
     area_id: { type: DataTypes.INTEGER, references: { model: AffectedArea, key: 'area_id' } }
-});
+}, { timestamps: false });
 
 module.exports = Resource;
