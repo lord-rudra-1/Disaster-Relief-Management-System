@@ -9,6 +9,6 @@ const AffectedArea = sequelize.define('AffectedArea', {
     population: { type: DataTypes.INTEGER, allowNull: false },
     casualties: { type: DataTypes.INTEGER, defaultValue: 0 },
     immediate_needs: { type: DataTypes.TEXT }
-});
+}, { timestamps: false });
 
 module.exports = AffectedArea;

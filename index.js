@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 require('./util'); // Ensure database connection
 
 // Import Models
@@ -22,22 +23,22 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-/** ✅ Show SignIn Page at `localhost:5002/` **/
+/**  Show SignIn Page at `localhost:5002/` **/
 app.get('/', (req, res) => {
     res.render("loginAcc");
 });
 
-/** ✅ Signup Page **/
+/**  Signup Page **/
 app.get('/signup', (req, res) => {
     res.render("CreateAcc");
 });
 
-/** ✅ Home Page **/
+/**  Home Page **/
 app.get('/home', (req, res) => {
     res.render("Home", { showTables: false, data: {} });
 });
 
-/** ✅ Fetch All Tables Data When Button Clicked **/
+/**  Fetch All Tables Data When Button Clicked **/
 app.get('/fetch-all-tables', async (req, res) => {
     try {
         const affectedAreas = await AffectedArea.findAll();
@@ -63,7 +64,7 @@ app.get('/fetch-all-tables', async (req, res) => {
     }
 });
 
-/** ✅ Signup API **/
+/**  Signup API **/
 app.post('/Signup', async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     if (!firstName || !lastName || !email || !password) {
@@ -79,7 +80,7 @@ app.post('/Signup', async (req, res) => {
     }
 });
 
-/** ✅ Login API **/
+/**  Login API **/
 app.post('/Signin', async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) return res.send("Email and password are required!");
@@ -99,7 +100,7 @@ app.post('/Signin', async (req, res) => {
 });
 
 /** ✅ Start Server **/
-const PORT = 5000;
+const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

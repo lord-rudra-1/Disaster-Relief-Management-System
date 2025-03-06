@@ -13,6 +13,6 @@ const Donation = sequelize.define('Donation', {
     quantity: { type: DataTypes.INTEGER, defaultValue: null },
     allocated_to: { type: DataTypes.INTEGER, references: { model: AffectedArea, key: 'area_id' } },
     donation_date: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
-});
+}, { timestamps: false });
 
 module.exports = Donation;

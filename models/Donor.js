@@ -5,6 +5,6 @@ const Donor = sequelize.define('Donor', {
     donor_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     donor_name: { type: DataTypes.STRING, allowNull: false },
     contact: { type: DataTypes.STRING, unique: true, allowNull: false }
-});
+}, { timestamps: false });
 
 module.exports = Donor;
