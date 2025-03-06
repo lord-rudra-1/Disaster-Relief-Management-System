@@ -38,7 +38,14 @@ app.get('/home', (req, res) => {
     res.render("Home", { showTables: false, data: {} });
 });
 
-/**  Fetch All Tables Data When Button Clicked **/
+app.get('/volunteer',(req,res)=>{
+    res.render("volunteer");
+})
+
+app.get('/admin/access',(req,res)=>{
+    const user = User.findAll({});
+    res.json(user);
+})
 app.get('/fetch-all-tables', async (req, res) => {
     try {
         const affectedAreas = await AffectedArea.findAll();
