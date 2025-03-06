@@ -1,10 +1,10 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-console.log("DB Config:", process.env.DB_NAME, process.env.USERNAME, process.env.PASS, process.env.HOST, process.env.DIALECT, process.env.PORT);
+console.log("DB Config:", process.env.DB_NAME, process.env.DB_USERNAME, process.env.PASS, process.env.HOST, process.env.DIALECT, process.env.PORT);
 
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.USERNAME, process.env.PASS,{
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.PASS,{
     host: process.env.HOST,
     dialect: process.env.DIALECT || 'mysql',
     port:process.env.PORT

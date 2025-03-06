@@ -98,12 +98,8 @@ app.post('/Signin', async (req, res) => {
     }
 });
 
-app.get('/volunteer',(req,res)=>{
-    res.render('volunteer');
-});
-
-/**  Start Server **/
-const PORT = 5002;
+/** ✅ Start Server **/
+const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
