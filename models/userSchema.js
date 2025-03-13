@@ -24,6 +24,11 @@ const UserLogin = sequelize.define('UserLoginTables', {
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    role: {
+        type: DataTypes.ENUM('admin', 'user'),
+        allowNull: false,
+        defaultValue: 'user',
     }
 }, { timestamps: false });
 
