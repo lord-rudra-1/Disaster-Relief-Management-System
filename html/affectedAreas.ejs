@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affected Areas</title>
+    <link rel="stylesheet" href="/Home.css">
+</head>
+<body>
+    <h1>Affected Areas</h1>
+    <table border="1">
+        <tr>
+            <th>Location</th>
+            <th>Disaster Type</th>
+            <th>Severity</th>
+            <th>Population</th>
+            <th>Casualties</th>
+            <th>Immediate Needs</th>
+        </tr>
+        <% affectedAreas.forEach(area => { %>
+        <tr>
+            <td><%= area.location %></td>
+            <td><%= area.disaster_type %></td>
+            <td><%= area.severity %></td>
+            <td><%= area.population %></td>
+            <td><%= area.casualties %></td>
+            <td><%= area.immediate_needs %></td>
+        </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

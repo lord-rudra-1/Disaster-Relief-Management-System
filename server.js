@@ -7,6 +7,7 @@ const Resource = require('./models/Resource');
 const Donor = require('./models/Donor');
 const Donation = require('./models/Donation');
 const VolunteerAssignment = require('./models/VolunteerAssignment');
+const relief_efforts = require("./models/relief_efforts");
 
 (async () => {
     try {

@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 const path = require("path");
-const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser'); 
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
+const { Op } = require("sequelize")
 require('dotenv').config();
-require('./util'); // Ensure database connection
+require('./util');
 
 // Import Models
 const User = require('./models/userSchema');
@@ -16,6 +17,7 @@ const Resource = require('./models/Resource');
 const Donor = require('./models/Donor');
 const Donation = require('./models/Donation');
 const VolunteerAssignment = require('./models/VolunteerAssignment');
+const relief_efforts = require('./models/relief_efforts');
 const { render } = require('ejs');
 
 app.set("view engine", "ejs");
@@ -198,7 +200,7 @@ app.post('/add_resource', async (req, res) => {
             quantity: quantity,
             area_id: area_id,
         });
-        res.redirect("/add_resource");  // Redirect to resources page after adding
+        res.redirect("/add_resource");  
     } catch (error) {
         console.error('Error adding resource:', error);
         res.status(500).send('Error adding resource');
@@ -212,8 +214,6 @@ app.post('/donations', async (req, res) => {
     const category_id = req.body.category_id;
     const quantity = req.body.quantity;
     const allocated_to = req.body.quantity;
- 
-
 
     try {
         await Donation.create({
@@ -240,6 +240,73 @@ app.get('/affected-area', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
+app.get("/relief_effort", async (req, res) => {
+    try {
+        res.render('relief-effortForm');
+    } catch (error) {
+        console.error("Error fetching affected areas:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
+app.post('/relief_effort', async (req, res) => {
+    const area_id = req.body.area_id;
+    const disaster_type = req.body.disaster_type;
+    const status = req.body.status;
+    const volunteer_id = req.body.volunteer_id;
+    const resource_id = req.body.resource_id;
+    const quantity_dispatch = req.body.quantity_dispatch;
+
+    try {
+        await relief_efforts.create({
+            area_id : area_id,
+            disaster_type : disaster_type,
+            status : status,
+            volunteer_id : volunteer_id,
+            resource_id : resource_id,
+            quantity_dispatch : quantity_dispatch,
+        });
+        res.redirect("/home");  // Redirect to resources page after adding
+    } catch (error) {
+        console.error('Error adding resource:', error);
+        res.status(500).send('Error adding resource');
+    }
+});
+
+app.get("/1", async (req, res) => {
+    try {
+        const affectedAreas = await AffectedArea.findAll({
+            where: { severity: 'High' }
+        });
+        console.log(affectedAreas);
+        res.json(affectedAreas); 
+    } catch (error) {
+        console.error("Error fetching high severity affected areas:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+app.get('/2', async (req, res) => {
+    try {
+        const volunteers = await Volunteer.findAll({    
+            where: {
+                skills: {
+                    [Op.like]: '%Medical%' // Matches any skill containing 'medical'
+                },
+                availability: true
+            }
+        });
+        console.log('volunteers');
+        res.json(volunteers); // Send the result as JSON
+    } catch (error) {
+        console.error("Error retrieving medical volunteers:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
 
 const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
