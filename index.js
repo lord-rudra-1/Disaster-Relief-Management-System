@@ -148,9 +148,39 @@ app.post('/donor',async(req,res)=>{
     res.redirect("/home");
 })
 
-app.get('/donation',(req,res)=>{
-    res.render('NewDonorForm');
+// app.get('/donation',(req,res)=>{
+//     res.render("donationForm");
+// })
+
+// app.post('/donation',async(req,res)=>{
+//     const {donor_id, dontation_type, amount, category_id, quantity, allocated_to, donation_date} = req.body;
+//     await Donation.create({
+//         donor_id:,
+//         dontation_type:,
+//         amount:,
+//         category_id:,
+//         quantity:,
+//         allocated_to:,
+//         donation_date: Date.now(),
+//     });
+//     res.redirect('/donation');
+// })
+
+app.post('/volunteerSignup',async(req,res)=>{
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const contact = req.body.contact;
+    const skill = req.body.skills;
+    console.log(fname + lname + contact + skill);
+    await Volunteer.create({
+        name : fname,
+        //lname : lname,
+        contact : contact,
+        skills : skill,
+    });
+    res.redirect("/volunteer");
 })
+
 
 const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
