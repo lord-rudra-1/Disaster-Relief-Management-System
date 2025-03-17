@@ -16,6 +16,7 @@ const Resource = require('./models/Resource');
 const Donor = require('./models/Donor');
 const Donation = require('./models/Donation');
 const VolunteerAssignment = require('./models/VolunteerAssignment');
+const { render } = require('ejs');
 
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, './html'));
@@ -43,7 +44,7 @@ app.get('/volunteer',(req,res)=>{
     res.render("volunteer");
 })
 
-app.get('/admin/access', async (req, res) => {
+app.get('/admin/dashboard', async (req, res) => {
     
     const { id } = req.cookies; 
     if (!id) 
@@ -60,7 +61,7 @@ app.get('/admin/access', async (req, res) => {
     if (user.role === "admin") 
         {
         const users = await User.findAll();
-        return res.json(users);
+        return res.render('adminDashboard');
     } 
     else 
     {
@@ -69,7 +70,7 @@ app.get('/admin/access', async (req, res) => {
 });
 
 
-app.get('/fetch-all-tables', async (req, res) => {
+app.get('/show-tables', async (req, res) => {
     try {
         const affectedAreas = await AffectedArea.findAll();
         const volunteers = await Volunteer.findAll();
@@ -79,7 +80,7 @@ app.get('/fetch-all-tables', async (req, res) => {
         const resourceCategories = await ResourceCategory.findAll();
         const assignments = await VolunteerAssignment.findAll();
 
-        res.json({
+        res.render('all_table_display', {
             affectedAreas,
             volunteers,
             donors,
@@ -88,8 +89,7 @@ app.get('/fetch-all-tables', async (req, res) => {
             resourceCategories,
             assignments
         });
-    } 
-    catch (error) {
+    } catch (error) {
         console.error("Error fetching tables:", error);
         res.status(500).send("Internal Server Error");
     }
@@ -132,6 +132,20 @@ app.post('/Signin', async (req, res) => {
 
 app.get('/admin/Dashboard',async(req,res)=>{
     res.render("adminDashboard");
+})
+
+app.get('/donor',(req,res)=>{
+    res.render('NewDonorForm');
+})
+
+app.post('/donor',async(req,res)=>{
+    const name = req.body.donor_name;
+    const contact = req.body.contact
+    await Donor.create({
+        donor_name: name,
+        contact: contact,
+    });
+    res.redirect("/home");
 })
 
 const PORT = process.env.PORT_SERVER;

@@ -20,9 +20,10 @@
     <div class="container">
         <a class="box" id="volunteer" href="/volunteer">Volunteers</a>
         <button class="box" id="resource">Resource Tracking</button>
-        <button class="box" id="donation">Donation Management</button>
+        <a class="box" id="donor" href='/donor'>New Donor</a>
+        <a class="box" id="/Donation">New Donor</a>
         <button class="box" id="affected">Affected Area Management</button>
-        <% if(locals.flag) { %><button class="box" id="displayTables" onclick="window.location.href='/fetch-all-tables'">Admin Dashboard</button> <% } %>
+        <% if(locals.flag) { %><button class="box" id="displayTables" onclick="window.location.href='/fetch-all-tables'">Display All Tables</button> <% } %>
     </div>
 
     <% if (showTables) { %>
@@ -129,8 +130,11 @@
         const donation = document.querySelector('#donation')
         const affected = document.querySelector('#affected')
         const vol = document.querySelector('#vol');
+        const AdminDashboard = document.getElementById('displayTables');
 
-
+        AdminDashboard.addEventListener('click',()=>{
+            window.location.href = '/admin/dashboard';
+        })
 
 
         volunteer.addEventListener('click' , ()=>{
