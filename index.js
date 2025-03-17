@@ -16,6 +16,7 @@ const Resource = require('./models/Resource');
 const Donor = require('./models/Donor');
 const Donation = require('./models/Donation');
 const VolunteerAssignment = require('./models/VolunteerAssignment');
+const { render } = require('ejs');
 
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, './html'));
@@ -132,6 +133,20 @@ app.post('/Signin', async (req, res) => {
 
 app.get('/admin/Dashboard',async(req,res)=>{
     res.render("adminDashboard");
+})
+
+app.get('/donor',(req,res)=>{
+    res.render('NewDonorForm');
+})
+
+app.post('/donor',async(req,res)=>{
+    const name = req.body.donor_name;
+    const contact = req.body.contact
+    await Donor.create({
+        donor_name: name,
+        contact: contact,
+    });
+    res.redirect("/home");
 })
 
 const PORT = process.env.PORT_SERVER;
