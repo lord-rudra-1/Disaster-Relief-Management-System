@@ -35,9 +35,20 @@ app.get('/signup', (req, res) => {
     res.render("CreateAcc");
 });
 
-app.get('/home', (req, res) => {
+app.get('/home',async (req, res) => {
     const Show = false;
-    res.render("Home", {flag : true, showTables:false});
+    var flag = false;
+    const  id  = req.cookies?.id;
+    if (!id) 
+    {
+        return res.render("Home", {flag : flag, showTables:false});
+    }
+    const user = await User.findOne({ where: { id } });
+    if(user.role === "admin")
+    {
+        flag = true;
+    }
+    res.render("Home", {flag : flag, showTables:false});
 });
 
 app.get('/volunteer',(req,res)=>{
@@ -153,19 +164,6 @@ app.get('/donation',(req,res)=>{
     res.render('donations');
 })
 
-app.post('/donation',async(req,res)=>{
-    const {donor_id, dontation_type, amount, category_id, quantity, allocated_to} = req.body;
-    await Donation.create({
-        donor_id: donor_id,
-        dontation_type: dontation_type,
-        amount: amount,
-        category_id: category_id,
-        quantity: quantity,
-        allocated_to: allocated_to,
-        donation_date: Date.now(),
-    });
-    res.redirect('/donation');
-})
 
 app.post('/volunteerSignup',async(req,res)=>{
     const fname = req.body.fname;
@@ -207,6 +205,41 @@ app.post('/add_resource', async (req, res) => {
     }
 });
 
+app.post('/donations', async (req, res) => {
+    const donor_id = req.body.donor_id;
+    const donation_type = req.body.donation_type;
+    const amount = req.body.amount;
+    const category_id = req.body.category_id;
+    const quantity = req.body.quantity;
+    const allocated_to = req.body.quantity;
+ 
+
+
+    try {
+        await Donation.create({
+            donor_id : donor_id,
+            donation_type : donation_type,
+            amount : amount,
+            category_id : category_id,
+            quantity : quantity,
+            allocated_to : quantity,
+        });
+        res.redirect("/home");  // Redirect to resources page after adding
+    } catch (error) {
+        console.error('Error adding resource:', error);
+        res.status(500).send('Error adding resource');
+    }
+});
+
+app.get('/affected-area', async (req, res) => {
+    try {
+        const affectedAreas = await AffectedArea.findAll();
+        res.render('affected-area', { affectedAreas });
+    } catch (error) {
+        console.error("Error fetching affected areas:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
