@@ -148,6 +148,10 @@ app.post('/donor',async(req,res)=>{
     res.redirect("/home");
 })
 
+app.get('/donation',(req,res)=>{
+    res.render('NewDonorForm');
+})
+
 const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
