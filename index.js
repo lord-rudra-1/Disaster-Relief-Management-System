@@ -148,23 +148,23 @@ app.post('/donor',async(req,res)=>{
     res.redirect("/home");
 })
 
-// app.get('/donation',(req,res)=>{
-//     res.render("donationForm");
-// })
+app.get('/donation',(req,res)=>{
+    res.render('donations');
+})
 
-// app.post('/donation',async(req,res)=>{
-//     const {donor_id, dontation_type, amount, category_id, quantity, allocated_to, donation_date} = req.body;
-//     await Donation.create({
-//         donor_id:,
-//         dontation_type:,
-//         amount:,
-//         category_id:,
-//         quantity:,
-//         allocated_to:,
-//         donation_date: Date.now(),
-//     });
-//     res.redirect('/donation');
-// })
+app.post('/donation',async(req,res)=>{
+    const {donor_id, dontation_type, amount, category_id, quantity, allocated_to} = req.body;
+    await Donation.create({
+        donor_id: donor_id,
+        dontation_type: dontation_type,
+        amount: amount,
+        category_id: category_id,
+        quantity: quantity,
+        allocated_to: allocated_to,
+        donation_date: Date.now(),
+    });
+    res.redirect('/donation');
+})
 
 app.post('/volunteerSignup',async(req,res)=>{
     const fname = req.body.fname;
