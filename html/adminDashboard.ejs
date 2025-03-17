@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimized Queries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .query-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 600px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h2>Optimized Queries</h2>
+    <div class="query-container">
+        <button onclick="showQuery(1)">Get Affected Areas with Highest Casualties</button>
+        <button onclick="showQuery(2)">Retrieve Available Volunteers with Medical Skills</button>
+        <button onclick="showQuery(3)">Find Total Donations Received by Each Donor</button>
+        <button onclick="showQuery(4)">Get Resources Allocated to Each Area</button>
+        <button onclick="showQuery(5)">Volunteers Assigned to Each Relief Effort</button>
+        <button onclick="showQuery(6)">Get Unallocated Donations</button>
+        <button onclick="showQuery(7)">Resources Needed for Each Disaster Area</button>
+    </div>
+    
+    <pre id="queryDisplay"></pre>
+    
+    <script>
+        const queries = [
+            "SELECT location, disaster_type, severity, casualties FROM Affected_Areas ORDER BY casualties DESC LIMIT 5;",
+            "SELECT name, contact FROM Volunteers WHERE skills LIKE '%medical%' AND availability = TRUE;",
+            "SELECT d.donor_name, COUNT(D.donation_id) AS total_donations, SUM(D.amount) AS total_amount FROM Donations D JOIN Donors d ON D.donor_id = d.donor_id GROUP BY d.donor_name ORDER BY total_amount DESC;",
+            "SELECT A.location, RC.category_name, R.quantity FROM Resources R JOIN Affected_Areas A ON R.area_id = A.area_id JOIN Resource_Categories RC ON R.category_id = RC.category_id ORDER BY A.location;",
+            "SELECT R.effort_id, A.location, V.name, VA.task FROM Relief_Efforts R JOIN Effort_Volunteers EV ON R.effort_id = EV.effort_id JOIN Volunteers V ON EV.volunteer_id = V.volunteer_id JOIN Volunteer_Assignments VA ON V.volunteer_id = VA.volunteer_id JOIN Affected_Areas A ON R.area_id = A.area_id WHERE R.status = 'In-Progress';",
+            "SELECT donor_name, donation_type, amount, category_id FROM Donations WHERE allocated_to IS NULL;",
+            "SELECT A.location, RC.category_name, SUM(R.quantity) AS total_required FROM Affected_Areas A JOIN Resources R ON A.area_id = R.area_id JOIN Resource_Categories RC ON R.category_id = RC.category_id GROUP BY A.location, RC.category_name HAVING total_required < 50;"
+        ];
+        
+        function showQuery(index) {
+            document.getElementById("queryDisplay").innerText = queries[index - 1];
+        }
+    </script>
+</body>
+</html>

@@ -22,7 +22,7 @@
         <button class="box" id="resource">Resource Tracking</button>
         <button class="box" id="donation">Donation Management</button>
         <button class="box" id="affected">Affected Area Management</button>
-        <button class="box" id="displayTables" onclick="window.location.href='/fetch-all-tables'">Display All Tables</button>
+        <% if(locals.flag) { %><button class="box" id="displayTables" onclick="window.location.href='/fetch-all-tables'">Display All Tables</button> <% } %>
     </div>
 
     <% if (showTables) { %>
@@ -123,6 +123,36 @@
         </table>
 
     <% } %>
+    <script>
+        const volunteer = document.querySelector('#volunteer');
+        const resource = document.querySelector('#resource');
+        const donation = document.querySelector('#donation')
+        const affected = document.querySelector('#affected')
+        const vol = document.querySelector('#vol');
+
+
+
+
+        volunteer.addEventListener('click' , ()=>{
+            window.location.href = 'volunteer.ejs'
+        })
+
+        resource.addEventListener('click', () => {
+            window.location.href = 'resource.ejs';
+        });
+
+
+        donation.addEventListener('click', () => {
+            window.location.href = 'donation.ejs';
+        });
+
+
+        affected.addEventListener('click', () => {
+            window.location.href = 'affected.ejs';
+        });
+
+
+    </script>
 
 </body>
 </html>

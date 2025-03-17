@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require("path");
+const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 require('dotenv').config();
@@ -22,8 +23,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser()); 
 
-/**  Show SignIn Page at `localhost:5002/` **/
 app.get('/', (req, res) => {
     res.render("loginAcc");
 });
@@ -33,19 +34,41 @@ app.get('/signup', (req, res) => {
     res.render("CreateAcc");
 });
 
-/**  Home Page **/
 app.get('/home', (req, res) => {
-    res.render("Home", { showTables: false, data: {} });
+    const Show = false;
+    res.render("Home", {flag : true, showTables:false});
 });
 
 app.get('/volunteer',(req,res)=>{
     res.render("volunteer");
 })
 
-app.get('/admin/access',(req,res)=>{
-    const user = User.findAll({});
-    res.json(user);
-})
+app.get('/admin/access', async (req, res) => {
+    
+    const { id } = req.cookies; 
+    if (!id) 
+    {
+        return res.status(401).send("Unauthorized: No ID found in cookies");
+    }
+
+    const user = await User.findOne({ where: { id } });
+
+    if (!user) 
+    {
+        return res.status(404).send("User not found");
+    }
+    if (user.role === "admin") 
+        {
+        const users = await User.findAll();
+        return res.json(users);
+    } 
+    else 
+    {
+        return res.status(403).send("Forbidden: You do not have admin access");
+    }
+});
+
+
 app.get('/fetch-all-tables', async (req, res) => {
     try {
         const affectedAreas = await AffectedArea.findAll();
@@ -65,13 +88,14 @@ app.get('/fetch-all-tables', async (req, res) => {
             resourceCategories,
             assignments
         });
-    } catch (error) {
+    } 
+    catch (error) {
         console.error("Error fetching tables:", error);
         res.status(500).send("Internal Server Error");
     }
 });
 
-/**  Signup API **/
+
 app.post('/Signup', async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     if (!firstName || !lastName || !email || !password) {
@@ -80,14 +104,14 @@ app.post('/Signup', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
         await User.create({ firstName, lastName, email, password: hashedPassword });
-        res.redirect('/home'); // Redirect to Home after signup
+        res.redirect('/'); 
     } catch (err) {
         console.error(err);
         res.status(500).send("Error creating user");
     }
 });
 
-/**  Login API **/
+
 app.post('/Signin', async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) return res.send("Email and password are required!");
@@ -98,15 +122,18 @@ app.post('/Signin', async (req, res) => {
 
         const match = await bcrypt.compare(password, user.password);
         if (!match) return res.status(401).send("Invalid email or password!");
-
-        res.redirect('/home'); // Redirect to Home after login
+        res.cookie("id",user.id);
+        res.redirect('/home'); 
     } catch (err) {
         console.error(err);
         res.status(500).send("Error signing in");
     }
 });
 
-/** ✅ Start Server **/
+app.get('/admin/Dashboard',async(req,res)=>{
+    res.render("adminDashboard");
+})
+
 const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
