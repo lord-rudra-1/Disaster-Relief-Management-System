@@ -70,7 +70,7 @@ app.get('/admin/dashboard', async (req, res) => {
 });
 
 
-app.get('/fetch-all-tables', async (req, res) => {
+app.get('/show-tables', async (req, res) => {
     try {
         const affectedAreas = await AffectedArea.findAll();
         const volunteers = await Volunteer.findAll();
@@ -80,7 +80,7 @@ app.get('/fetch-all-tables', async (req, res) => {
         const resourceCategories = await ResourceCategory.findAll();
         const assignments = await VolunteerAssignment.findAll();
 
-        res.json({
+        res.render('all_table_display', {
             affectedAreas,
             volunteers,
             donors,
@@ -89,8 +89,7 @@ app.get('/fetch-all-tables', async (req, res) => {
             resourceCategories,
             assignments
         });
-    } 
-    catch (error) {
+    } catch (error) {
         console.error("Error fetching tables:", error);
         res.status(500).send("Internal Server Error");
     }
