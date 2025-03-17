@@ -4,7 +4,7 @@ const Donor = require('./Donor');
 const ResourceCategory = require('./ResourceCategory');
 const AffectedArea = require('./AffectedArea');
 
-const Donation = sequelize.define('Donation', {
+const Donation = sequelize.define('Donations', {
     donation_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     donor_id: { type: DataTypes.INTEGER, references: { model: Donor, key: 'donor_id' } },
     donation_type: { type: DataTypes.ENUM('Cash', 'Resource'), allowNull: false },

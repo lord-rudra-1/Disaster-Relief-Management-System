@@ -19,11 +19,10 @@
 
     <div class="container">
         <a class="box" id="volunteer" href="/volunteer">Volunteers</a>
-        <button class="box" id="resource">Resource Tracking</button>
         <a class="box" id="donor" href='/donor'>New Donor</a>
-        <a class="box" id="/Donation">New Donor</a>
-        <button class="box" id="affected">Affected Area Management</button>
-        <% if(locals.flag) { %><button class="box" id="displayTables" onclick="window.location.href='/fetch-all-tables'">Display All Tables</button> <% } %>
+        <a class="box" href="/donation">Donation</a>
+        <a class="box" id="affected" href="/affected-area">Show Affected Areas </a>
+        <% if(locals.flag) { %><button class="box" id="displayTables">Admin dashboard</button> <% } %>
     </div>
 
     <% if (showTables) { %>
