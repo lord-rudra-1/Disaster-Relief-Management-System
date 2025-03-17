@@ -23,7 +23,7 @@
         <a class="box" id="donor" href='/donor'>New Donor</a>
         <a class="box" id="/Donation">New Donor</a>
         <button class="box" id="affected">Affected Area Management</button>
-        <% if(locals.flag) { %><button class="box" id="displayTables">Admin Dashboard</button> <% } %>
+        <% if(locals.flag) { %><button class="box" id="displayTables" onclick="window.location.href='/fetch-all-tables'">Display All Tables</button> <% } %>
     </div>
 
     <% if (showTables) { %>
