@@ -43,7 +43,7 @@ app.get('/volunteer',(req,res)=>{
     res.render("volunteer");
 })
 
-app.get('/admin/access', async (req, res) => {
+app.get('/admin/dashboard', async (req, res) => {
     
     const { id } = req.cookies; 
     if (!id) 
@@ -60,7 +60,7 @@ app.get('/admin/access', async (req, res) => {
     if (user.role === "admin") 
         {
         const users = await User.findAll();
-        return res.json(users);
+        return res.render('adminDashboard');
     } 
     else 
     {

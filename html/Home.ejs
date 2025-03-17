@@ -22,7 +22,7 @@
         <button class="box" id="resource">Resource Tracking</button>
         <button class="box" id="donation">Donation Management</button>
         <button class="box" id="affected">Affected Area Management</button>
-        <% if(locals.flag) { %><button class="box" id="displayTables" onclick="window.location.href='/fetch-all-tables'">Display All Tables</button> <% } %>
+        <% if(locals.flag) { %><button class="box" id="displayTables">Admin Dashboard</button> <% } %>
     </div>
 
     <% if (showTables) { %>
@@ -129,8 +129,11 @@
         const donation = document.querySelector('#donation')
         const affected = document.querySelector('#affected')
         const vol = document.querySelector('#vol');
+        const AdminDashboard = document.getElementById('displayTables');
 
-
+        AdminDashboard.addEventListener('click',()=>{
+            window.location.href = '/admin/dashboard';
+        })
 
 
         volunteer.addEventListener('click' , ()=>{
