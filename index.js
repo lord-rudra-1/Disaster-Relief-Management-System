@@ -44,6 +44,7 @@ app.get('/volunteer',(req,res)=>{
     res.render("volunteer");
 })
 
+
 app.get('/admin/dashboard', async (req, res) => {
     
     const { id } = req.cookies; 
@@ -180,6 +181,31 @@ app.post('/volunteerSignup',async(req,res)=>{
     });
     res.redirect("/volunteer");
 })
+
+app.get('/add_resource', (req, res) => {
+    res.render('add_resource');  // Make sure add_resource.ejs exists in the views folder
+});
+
+
+app.post('/add_resource', async (req, res) => {
+    const category_id = req.body.category_id;
+    const quantity = req.body.quantity;
+    const area_id = req.body.area_id;
+
+    console.log(`Category: ${category_id}, Quantity: ${quantity}, Area: ${area_id}`);
+
+    try {
+        await Resource.create({
+            category_id: category_id,
+            quantity: quantity,
+            area_id: area_id,
+        });
+        res.redirect("/add_resource");  // Redirect to resources page after adding
+    } catch (error) {
+        console.error('Error adding resource:', error);
+        res.status(500).send('Error adding resource');
+    }
+});
 
 
 const PORT = process.env.PORT_SERVER;
