@@ -241,6 +241,22 @@ app.get('/affected-area', async (req, res) => {
     }
 });
 
+app.get("/1", async (req, res) => {
+    try {
+        const affectedAreas = await AffectedArea.findAll({
+            where: { severity: 'High' }
+        });
+
+        console.log("Fetched Affected Areas:", JSON.stringify(affectedAreas, null, 2));
+
+        res.render("one", { affectedAreas }); // Render the EJS page
+    } catch (error) {
+        console.error("Error fetching high severity affected areas:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
 const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);

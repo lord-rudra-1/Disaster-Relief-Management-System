@@ -42,7 +42,7 @@
     <h2>Optimized Queries</h2>
     <div class="query-container">
         <button onclick="window.location.href='/add_resource'">Add Resource</button>    
-        <button onclick="showQuery(1)">Get Affected Areas with Highest Casualties</button>
+        <button onclick="window.location.href='/1'">Get Affected Areas with Highest Casualties</button>
         <button onclick="showQuery(2)">Retrieve Available Volunteers with Medical Skills</button>
         <button onclick="showQuery(3)">Find Total Donations Received by Each Donor</button>
         <button onclick="showQuery(4)">Get Resources Allocated to Each Area</button>
@@ -52,9 +52,7 @@
         <button onclick="window.location.href='/show-tables'">Show all Tables</button>
     </div>
     
-    <pre id="queryDisplay"></pre>
-    
-    <script>
+    <!-- <script>
         const queries = [
             "SELECT location, disaster_type, severity, casualties FROM Affected_Areas ORDER BY casualties DESC LIMIT 5;",
             "SELECT name, contact FROM Volunteers WHERE skills LIKE '%medical%' AND availability = TRUE;",
@@ -68,6 +66,6 @@
         function showQuery(index) {
             document.getElementById("queryDisplay").innerText = queries[index - 1];
         }
-    </script>
+    </script> -->
 </body>
 </html>

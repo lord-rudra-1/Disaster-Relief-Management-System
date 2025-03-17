@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affected Areas - High Severity</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Add CSS if needed -->
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 10px; text-align: left; }
+        th { background-color: #f4a261; color: white; }
+        tr:nth-child(even) { background-color: #f8e9d2; }
+    </style>
+</head>
+<body>
+    <h1>Affected Areas (High Severity)</h1>
+    
+    <% if (affectedAreas.length === 0) { %>
+        <p style="text-align: center; color: red;">No high severity affected areas found.</p>
+    <% } else { %>
+        <table>
+            <tr>
+                <th>Area ID</th>
+                <th>Location</th>
+                <th>Disaster Type</th>
+                <th>Severity</th>
+                <th>Population</th>
+                <th>Casualties</th>
+                <th>Immediate Needs</th>
+            </tr>
+            <% affectedAreas.forEach(area => { %>
+                <tr>
+                    <td><%= area.area_id || "N/A" %></td>
+                    <td><%= area.location || "Unknown" %></td>
+                    <td><%= area.disaster_type || "N/A" %></td>
+                    <td><%= area.severity || "N/A" %></td>
+                    <td><%= area.population || "N/A" %></td>
+                    <td><%= area.casualties || "N/A" %></td>
+                    <td><%= area.immediate_needs || "No Data" %></td>
+                </tr>
+            <% }) %>
+        </table>
+    <% } %>
+
+    <br>
+    <a href="/home" style="display: block; text-align: center; font-size: 18px;">⬅ Go Back to Home</a>
+</body>
+</html>
