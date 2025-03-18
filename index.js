@@ -238,7 +238,7 @@ app.post('/donations', async (req, res) => {
 app.get('/affected-area', async (req, res) => {
     try {
         const affectedAreas = await AffectedArea.findAll();
-        res.render('affected-area', { affectedAreas });
+        res.render('affectedAreas', { affectedAreas });
     } catch (error) {
         console.error("Error fetching affected areas:", error);
         res.status(500).send("Internal Server Error");
@@ -404,6 +404,37 @@ app.post('/unassign-volunteer',async (req,res)=>{
     }
 
 });
+
+app.get('/add_affectedareas',(req,res)=>{
+    res.render("add_affectedareas");
+})
+
+app.post('/add_affectedareas', async (req, res) => {
+    const location = req.body.location;
+    const disaster_type = req.body.disaster_type;
+    const severity = req.body.severity;
+    const population = req.body.population;
+    const casualties = req.body.casualties;
+    const immediate_needs = req.body.immediate_needs;
+
+    try {
+        await AffectedArea.create({
+            location : location,
+            disaster_type : disaster_type,
+            severity : severity,
+            population : population,
+            casualties : casualties,
+            immediate_needs : immediate_needs,
+        });
+        res.redirect("/admin/dashboard");  
+    } catch (error) {
+        console.error('Error adding resource:', error);
+        res.status(500).send('Error adding resource');
+    }
+});
+
+
+
 
 const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
