@@ -18,7 +18,8 @@ const Donor = require('./models/Donor');
 const Donation = require('./models/Donation');
 const VolunteerAssignment = require('./models/VolunteerAssignment');
 const relief_efforts = require('./models/relief_efforts');
-const { render } = require('ejs');
+const ejs = require('ejs');
+const volunteer_assign = require('./models/VolunteerAssignment');
 
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, './html'));
@@ -93,6 +94,7 @@ app.get('/show-tables', async (req, res) => {
         const resources = await Resource.findAll();
         const resourceCategories = await ResourceCategory.findAll();
         const assignments = await VolunteerAssignment.findAll();
+        const relief_effort = await relief_efforts.findAll();
 
         res.render('all_table_display', {
             affectedAreas,
@@ -101,7 +103,8 @@ app.get('/show-tables', async (req, res) => {
             donations,
             resources,
             resourceCategories,
-            assignments
+            assignments,
+            relief_effort
         });
     } catch (error) {
         console.error("Error fetching tables:", error);
@@ -159,7 +162,8 @@ app.post('/donor',async(req,res)=>{
         donor_name: name,
         contact: contact,
     });
-    res.redirect("/home");
+    const count = await Donor.count();
+    res.render("NewDonorForm",{id: count});
 })
 
 app.get('/donation',(req,res)=>{
@@ -268,7 +272,17 @@ app.post('/relief_effort', async (req, res) => {
             resource_id : resource_id,
             quantity_dispatch : quantity_dispatch,
         });
-        res.redirect("/home");  // Redirect to resources page after adding
+        const R = await Resource.findAll({where :{ resource_id: resource_id }});
+        await Resource.update(
+            { quantity:  R.quantity - quantity_dispatch},
+            { where: { resource_id: resource_id } }
+        );
+        await Volunteer.update(
+            { availability: false },
+            { where: { volunteer_id: volunteer_id } }
+        );
+
+        res.redirect("/admin/dashboard");  // Redirect to resources page after adding
     } catch (error) {
         console.error('Error adding resource:', error);
         res.status(500).send('Error adding resource');
@@ -280,34 +294,93 @@ app.get("/1", async (req, res) => {
         const affectedAreas = await AffectedArea.findAll({
             where: { severity: 'High' }
         });
-        console.log(affectedAreas);
-        res.json(affectedAreas); 
+
+        console.log("Fetched Affected Areas:", JSON.stringify(affectedAreas, null, 2));
+
+        res.render("one", { affectedAreas }); 
     } catch (error) {
         console.error("Error fetching high severity affected areas:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).send("Internal Server Error");
     }
 });
 
 app.get('/2', async (req, res) => {
     try {
-        const volunteers = await Volunteer.findAll({    
+        const vol = await Volunteer.findAll({    
             where: {
                 skills: {
-                    [Op.like]: '%Medical%' // Matches any skill containing 'medical'
+                    [Op.like]: '%Medical%' 
                 },
                 availability: true
             }
         });
-        console.log('volunteers');
-        res.json(volunteers); // Send the result as JSON
+        res.render("two",{volunteers:vol}); 
     } catch (error) {
         console.error("Error retrieving medical volunteers:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
+app.get("/volunteer_assign",(req,res)=>{
+    return res.render('volunteer_assign');
+})
 
+app.post('/volunteer_assign', async (req, res) => {
+    const volunteer_id = req.body.volunteer_id;
+    const area_id = req.body.area_id;
+    const task = req.body.task;
+    const assigned_date = req.body.assigned_date;
+    const status = req.body.status;
 
+    try {
+        await volunteer_assign.create({
+            volunteer_id : volunteer_id,
+            area_id : area_id,
+            task : task,
+            assigned_date : assigned_date,
+            status : status,
+        });
+        await Volunteer.update(
+            { availability: false },
+            { where: { volunteer_id: volunteer_id } }
+        );
+        res.redirect("/admin/dashboard");  
+    } catch (error) {
+        console.error('Error adding resource:', error);
+        res.status(500).send('Error adding resource');
+    }
+});
+
+// app.get("/3", async (req, res) => {
+//     try {
+//         const reliefEfforts = await relief_efforts.findAll({
+//             include: [
+//                 {
+//                     model: Volunteer,
+//                     attributes: ["volunteer_id", "name", "skills", "contact"],
+//                 },
+//                 {
+//                     model: AffectedArea,
+//                     attributes: ["area_id", "location", "disaster_type", "severity"],
+//                 }
+//             ]
+//         });
+
+//         res.json(reliefEfforts);
+//     } catch (error) {
+//         console.error("Error retrieving relief efforts:", error.message);
+//         res.status(500).json({ error: "Internal Server Error", details: error.message });
+//     }
+// });
+
+app.get('/4',async (req,res)=>{
+    const donations = await Donation.findAll({
+        where:{
+            allocated_to: null,
+        },
+    })
+    return res.render("four",{donations: donations});
+})
 const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
