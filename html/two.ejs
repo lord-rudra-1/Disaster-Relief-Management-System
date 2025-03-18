@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteers - Assigned Tasks</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Add CSS if needed -->
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 10px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #dff0d8; }
+    </style>
+</head>
+<body>
+    <h1>Volunteers - Assigned Tasks</h1>
+    
+    <% if (volunteers.length === 0) { %>
+        <p style="text-align: center; color: red;">No volunteers assigned yet.</p>
+    <% } else { %>
+        <table>
+            <tr>
+                <th>Volunteer ID</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Skills</th>
+                <th>Availability</th>
+                <th>Assigned Area</th>
+                <th>Task</th>
+            </tr>
+            <% volunteers.forEach(volunteer => { %>
+                <tr>
+                    <td><%= volunteer.volunteer_id || "N/A" %></td>
+                    <td><%= volunteer.name || "Unknown" %></td>
+                    <td><%= volunteer.contact || "N/A" %></td>
+                    <td><%= volunteer.skills || "N/A" %></td>
+                    <td><%= volunteer.availability ? "Available" : "Unavailable" %></td>
+                    <td><%= volunteer.assigned_area || "No Data" %></td>
+                    <td><%= volunteer.task || "No Task Assigned" %></td>
+                </tr>
+            <% }) %>
+        </table>
+    <% } %>
+
+    <br>
+    <a href="/home" style="display: block; text-align: center; font-size: 18px;">⬅ Go Back to Home</a>
+</body>
+</html>
