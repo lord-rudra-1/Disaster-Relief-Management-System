@@ -381,6 +381,30 @@ app.get('/4',async (req,res)=>{
     })
     return res.render("four",{donations: donations});
 })
+app.get('/unassign-volunteer',(req,res)=>{
+    res.render("unassign_volunteer");
+})
+app.post('/unassign-volunteer',async (req,res)=>{
+    try {
+        const { volunteer_id } = req.body; // Extract 'volunteer_id' (not 'id')
+
+        if (!volunteer_id) {
+            return res.status(400).send("Error: Volunteer ID is required.");
+        }
+
+        await Volunteer.update(
+            { availability: true },
+            { where: { volunteer_id } }
+        );
+
+        res.redirect('/admin/dashboard');
+    } catch (error) {
+        console.error("Error updating volunteer:", error);
+        res.status(500).send("Server Error");
+    }
+
+});
+
 const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
