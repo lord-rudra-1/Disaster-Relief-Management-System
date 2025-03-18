@@ -57,13 +57,25 @@ a {
     cursor: pointer;
 }
 
-#heading{
-    padding:50px;
-    
-}
 
 .box:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     background: #818181;
 }
+
+/* Heading initially hidden and off-screen */
+#heading {
+    padding:50px;
+    display: block;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+
+/* Apply transition when the page loads */
+body.loaded #heading {
+    transform: translateX(0);
+    opacity: 1;
+}
+
