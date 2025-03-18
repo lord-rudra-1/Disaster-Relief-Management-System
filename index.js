@@ -40,7 +40,7 @@ app.get('/signup', (req, res) => {
 
 app.get('/home',async (req, res) => {
     const Show = false;
-    var flag = false;
+    let flag = false;
     const  id  = req.cookies?.id;
     if (!id) 
     {
@@ -187,7 +187,7 @@ app.post('/volunteerSignup',async(req,res)=>{
 })
 
 app.get('/add_resource', (req, res) => {
-    res.render('add_resource');  // Make sure add_resource.ejs exists in the views folder
+    res.render('add_resource');  
 });
 
 
@@ -228,7 +228,7 @@ app.post('/donations', async (req, res) => {
             quantity : quantity,
             allocated_to : quantity,
         });
-        res.redirect("/home");  // Redirect to resources page after adding
+        res.redirect("/home"); 
     } catch (error) {
         console.error('Error adding resource:', error);
         res.status(500).send('Error adding resource');
@@ -407,5 +407,5 @@ app.post('/unassign-volunteer',async (req,res)=>{
 
 const PORT = process.env.PORT_SERVER;
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(` Server running on http://localhost:${PORT}`);
 });
