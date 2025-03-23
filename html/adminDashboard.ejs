@@ -55,8 +55,13 @@
         <button onclick="window.location.href='/2'">Retrieve Available Volunteers with Medical Skills</button>
         <button onclick="window.location.href='/4'">Get Unallocated Donations</button>
         <button onclick="window.location.href='/show-tables'">Show all Tables</button>
-        
+        <button onclick="window.location.href='/disable-affected-area'">Disable Affected Area</button>
+
     </div>
-    
+    <% if(locals.message) { %>
+        <script>
+            alert("<%= message %>");
+        </script>
+    <% } %>
 </body>
 </html>
