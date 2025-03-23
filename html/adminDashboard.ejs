@@ -3,60 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimized Queries</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-            background-color: black;
-        }
-        h2{
-            color:#f4f4f4;
-        }
-        .query-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        button {
-            background-color: rgb(248, 124, 0);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 500px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            max-width: 600px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-    </style>
+    <title>Admin Dashboard - Disaster Relief Management System</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h2>Optimized Queries</h2>
-    <div class="query-container">
-        <button onclick="window.location.href='/add_affectedareas'">Add Affected Area</button>    
-        <button onclick="window.location.href='/add_resource'">Add Resource</button>    
-        <button onclick="window.location.href='/relief_effort'">Relief Efforts</button>    
-        <button onclick="window.location.href='/volunteer_assign'">Volunteer_assign</button>    
-        <button onclick="window.location.href='/unassign-volunteer'">Unassign-volunteer</button>    
-        <button onclick="window.location.href='/1'">Get Affected Areas with Highest Severity</button>
-        <button onclick="window.location.href='/2'">Retrieve Available Volunteers with Medical Skills</button>
-        <button onclick="window.location.href='/4'">Get Unallocated Donations</button>
-        <button onclick="window.location.href='/show-tables'">Show all Tables</button>
-        
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>Admin Panel</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <a href="#resource-management" class="active">
+                    <i class="fas fa-box"></i>
+                    <span>Resource Management</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#volunteer-management">
+                    <i class="fas fa-users"></i>
+                    <span>Volunteer Management</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#analytics">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analytics & Reports</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Admin Header -->
+        <header class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <p>Manage and monitor disaster relief operations</p>
+        </header>
+
+        <!-- Main Container -->
+        <main class="admin-container">
+            <!-- Resource Management Section -->
+            <section id="resource-management" class="dashboard-section">
+                <h2 class="section-title">Resource Management</h2>
+                <div class="dashboard-grid">
+                    <a href="/add_affectedareas" class="dashboard-card">
+                        <h3>Add Affected Area</h3>
+                        <p>Register new areas affected by disasters</p>
+                    </a>
+                    <a href="/add_resource" class="dashboard-card">
+                        <h3>Add Resource</h3>
+                        <p>Add and manage relief resources</p>
+                    </a>
+                    <a href="/relief_effort" class="dashboard-card">
+                        <h3>Relief Efforts</h3>
+                        <p>Coordinate and track relief operations</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Volunteer Management Section -->
+            <section id="volunteer-management" class="dashboard-section">
+                <h2 class="section-title">Volunteer Management</h2>
+                <div class="dashboard-grid">
+                    <a href="/volunteer_assign" class="dashboard-card">
+                        <h3>Assign Volunteers</h3>
+                        <p>Assign volunteers to relief operations</p>
+                    </a>
+                    <a href="/unassign-volunteer" class="dashboard-card">
+                        <h3>Unassign Volunteers</h3>
+                        <p>Manage volunteer availability</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="dashboard-section">
+                <h2 class="section-title">Analytics & Reports</h2>
+                <div class="dashboard-grid">
+                    <a href="/1" class="dashboard-card">
+                        <h3>High Severity Areas</h3>
+                        <p>View areas with highest disaster severity</p>
+                    </a>
+                    <a href="/2" class="dashboard-card">
+                        <h3>Medical Volunteers</h3>
+                        <p>Find available medical volunteers</p>
+                    </a>
+                    <a href="/4" class="dashboard-card">
+                        <h3>Unallocated Donations</h3>
+                        <p>Track unallocated donations</p>
+                    </a>
+                    <a href="/show-tables" class="dashboard-card">
+                        <h3>All Tables</h3>
+                        <p>View complete system data</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="admin-footer">
+                <div class="footer-content">
+                    <p>Disaster Relief Management System - Empowering communities through efficient resource allocation and volunteer coordination during times of crisis.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Contact Support</a>
+                    </div>
+                </div>
+            </footer>
+        </main>
     </div>
-    
+
+    <script>
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('.sidebar-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Update active state
+                document.querySelectorAll('.menu-item a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Update active state on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.dashboard-section');
+            const navLinks = document.querySelectorAll('.sidebar-menu a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
