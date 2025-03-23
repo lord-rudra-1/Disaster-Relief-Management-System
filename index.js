@@ -58,6 +58,15 @@ app.get('/volunteer',(req,res)=>{
     res.render("volunteer");
 })
 
+app.get('/disable-affected-area',(req,res)=>{
+    res.render("DisableAffectedArea");
+})
+
+app.post('/disable-affected-area',async (req,res)=>{
+    const area_id = req.body.area_id;
+    await AffectedArea.update({status : "Deactive"},{where : {area_id : area_id}});
+    res.redirect(302, "/admin/dashboard");
+})
 
 app.get('/admin/dashboard', async (req, res) => {
     
@@ -394,6 +403,11 @@ app.post('/unassign-volunteer',async (req,res)=>{
 
         await Volunteer.update(
             { availability: true },
+            { where: { volunteer_id } }
+        );
+
+        await relief_efforts.update(
+            { status: 'inactive' },
             { where: { volunteer_id } }
         );
 
