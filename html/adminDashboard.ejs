@@ -22,6 +22,12 @@
                 </a>
             </li>
             <li class="menu-item">
+                <a href="#affected-area">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Affected Area</span>
+                </a>
+            </li>
+            <li class="menu-item">
                 <a href="#volunteer-management">
                     <i class="fas fa-users"></i>
                     <span>Volunteer Management</span>
@@ -34,6 +40,15 @@
                 </a>
             </li>
         </ul>
+        
+        <div class="sidebar-footer">
+            <li class="menu-item">
+                <a href="/home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+        </div>
     </nav>
 
     <!-- Main Content -->
@@ -50,10 +65,6 @@
             <section id="resource-management" class="dashboard-section">
                 <h2 class="section-title">Resource Management</h2>
                 <div class="dashboard-grid">
-                    <a href="/add_affectedareas" class="dashboard-card">
-                        <h3>Add Affected Area</h3>
-                        <p>Register new areas affected by disasters</p>
-                    </a>
                     <a href="/add_resource" class="dashboard-card">
                         <h3>Add Resource</h3>
                         <p>Add and manage relief resources</p>
@@ -61,6 +72,20 @@
                     <a href="/relief_effort" class="dashboard-card">
                         <h3>Relief Efforts</h3>
                         <p>Coordinate and track relief operations</p>
+                    </a>
+                </div>
+            </section>
+            <!--Affected Area Section-->
+            <section id="affected-area" class="dashboard-section">
+                <h2 class="section-title">Affected Area</h2>
+                <div class="dashboard-grid">
+                    <a href="/add_affectedareas" class="dashboard-card">
+                        <h3>Add Affected Area</h3>
+                        <p>Register new areas affected by disasters</p>
+                    </a>
+                    <a href="/disable-affected-area" class="dashboard-card">
+                        <h3>Disable Affected Area</h3>
+                        <p>Disable areas affected by disasters</p>
                     </a>
                 </div>
             </section>
@@ -107,10 +132,8 @@
             <footer class="admin-footer">
                 <div class="footer-content">
                     <p>Disaster Relief Management System - Empowering communities through efficient resource allocation and volunteer coordination during times of crisis.</p>
-                    <div class="footer-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
-                        <a href="#">Contact Support</a>
+                    <div class="footer-links" >
+                        <a id ="homebtn" href="/home">back to home</a>
                     </div>
                 </div>
             </footer>

@@ -85,6 +85,20 @@ body {
     font-size: 1.1rem;
 }
 
+/* Sidebar Footer */
+.sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--white);
+}
+
+.sidebar-footer .menu-item a {
+    padding: 0.75rem 1.5rem;
+}
+
 /* Main Content Styles */
 .main-content {
     flex: 1;
@@ -319,4 +333,14 @@ body {
     .footer-links a {
         display: block;
     }
-} 
+}
+
+#homebtn{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 50px;
+}
+
+
+
