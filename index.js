@@ -58,6 +58,15 @@ app.get('/volunteer',(req,res)=>{
     res.render("volunteer");
 })
 
+app.get('/disable-affected-area',(req,res)=>{
+    res.render("DisableAffectedArea");
+})
+
+app.post('/disable-affected-area',async (req,res)=>{
+    const area_id = req.body.area_id;
+    await AffectedArea.update({status : "Deactive"},{where : {area_id : area_id}});
+    res.redirect(302, "/admin/dashboard");
+})
 
 app.get('/admin/dashboard', async (req, res) => {
     
@@ -179,7 +188,6 @@ app.post('/volunteerSignup',async(req,res)=>{
     console.log(fname + lname + contact + skill);
     await Volunteer.create({
         name : fname,
-        //lname : lname,
         contact : contact,
         skills : skill,
     });
@@ -194,16 +202,17 @@ app.get('/add_resource', (req, res) => {
 app.post('/add_resource', async (req, res) => {
     const category_id = req.body.category_id;
     const quantity = req.body.quantity;
-    const area_id = req.body.area_id;
-
-    console.log(`Category: ${category_id}, Quantity: ${quantity}, Area: ${area_id}`);
 
     try {
-        await Resource.create({
-            category_id: category_id,
-            quantity: quantity,
-            area_id: area_id,
-        });
+        const category_id_from_db = await ResourceCategory.findOne({where : {category_id : category_id}});
+        if(!category_id_from_db)
+        {
+            return res.render("add_resource",{message : "Category ID not found"});
+        }
+        //const count = await Resource.findAndCountAll({where : {category_id : category_id}});
+        const resource = await Resource.findOne({where : {category_id : category_id}});
+        const quantity_from_db = resource.quantity + quantity;
+        await Resource.update({quantity : quantity_from_db},{where : {category_id : category_id}});
         res.redirect("/add_resource");  
     } catch (error) {
         console.error('Error adding resource:', error);
@@ -394,6 +403,11 @@ app.post('/unassign-volunteer',async (req,res)=>{
 
         await Volunteer.update(
             { availability: true },
+            { where: { volunteer_id } }
+        );
+
+        await relief_efforts.update(
+            { status: 'inactive' },
             { where: { volunteer_id } }
         );
 

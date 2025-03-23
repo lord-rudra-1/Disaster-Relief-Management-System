@@ -8,7 +8,8 @@ const AffectedArea = sequelize.define('AffectedArea', {
     severity: { type: DataTypes.ENUM('Low', 'Medium', 'High'), allowNull: false },
     population: { type: DataTypes.INTEGER, allowNull: false },
     casualties: { type: DataTypes.INTEGER, defaultValue: 0 },
-    immediate_needs: { type: DataTypes.TEXT }
+    immediate_needs: { type: DataTypes.TEXT },
+    status: { type: DataTypes.ENUM('Active', 'Deactive'), allowNull: false, defaultValue: 'Active' },
 }, { timestamps: false });
 
 module.exports = AffectedArea;
