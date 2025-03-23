@@ -281,11 +281,10 @@ app.post('/relief_effort', async (req, res) => {
             resource_id : resource_id,
             quantity_dispatch : quantity_dispatch,
         });
-        const R = await Resource.findAll({where :{ resource_id: resource_id }});
-        await Resource.update(
-            { quantity:  R.quantity - quantity_dispatch},
-            { where: { resource_id: resource_id } }
-        );
+        const R = await Resource.findOne({where :{ resource_id: resource_id }});
+        const quantity_from_db = R.quantity - quantity_dispatch;
+        await Resource.update({quantity : quantity_from_db},{where : {resource_id : resource_id}});
+        
         await Volunteer.update(
             { availability: false },
             { where: { volunteer_id: volunteer_id } }
