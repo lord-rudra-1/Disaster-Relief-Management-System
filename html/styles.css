@@ -1,4 +1,4 @@
-/* Modern CSS Styling */
+
 :root {
     --primary-color: #2563eb;
     --secondary-color: #1e40af;
@@ -25,7 +25,7 @@ body {
     flex-direction: column;
 }
 
-/* Navbar Styling */
+
 .navbar {
     background-color: var(--white);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -70,7 +70,6 @@ body {
     color: var(--primary-color);
 }
 
-/* Main Content */
 main {
     flex: 1;
     padding: 2rem;
@@ -87,7 +86,7 @@ main {
     text-align: center;
 }
 
-/* Grid Layout */
+
 .grid-layout {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -124,7 +123,7 @@ main {
     opacity: 0.8;
 }
 
-/* Tables Styling */
+
 .tables-container {
     display: flex;
     flex-direction: column;
@@ -177,7 +176,7 @@ tr:hover {
     background-color: var(--light-gray);
 }
 
-/* Footer Styling */
+
 .footer {
     background-color: var(--white);
     padding: 2rem;
@@ -227,7 +226,7 @@ tr:hover {
     border-top: 1px solid var(--border-color);
 }
 
-/* Button Styling */
+
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -248,7 +247,7 @@ tr:hover {
     background-color: var(--secondary-color);
 }
 
-/* Form Styling */
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -273,7 +272,7 @@ tr:hover {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .navbar-container {
         flex-direction: column;

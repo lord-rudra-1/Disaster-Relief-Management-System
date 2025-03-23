@@ -18,7 +18,9 @@
                 <li><a href="/volunteer" class="nav-link">Volunteers</a></li>
                 <!-- <li><a href="/add_resource" class="nav-link">Resources</a></li> -->
                 <li><a href="/affected-area" class="nav-link">Affected Areas</a></li>
+                <% if(locals.flag) { %>
                 <li><a href="/admin/dashboard" class="nav-link">Admin Dashboard</a></li>
+                <% } %>
             </ul>
         </div>
     </nav>
