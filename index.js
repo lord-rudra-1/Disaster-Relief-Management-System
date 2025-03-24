@@ -437,10 +437,10 @@ app.post("/totalDonation",async(req,res)=>{
         let totalDonation = 0;
 
         for (let donation of Alldonation) {
-            totalDonation += donation.amount;  // Assuming 'amount' is the donation field
+            totalDonation += donation.amount;  
         }
 
-        res.send({ totalDonation: totalDonation }); // Send total as JSON response
+        res.send({ totalDonation: totalDonation }); 
     } catch (error) {
         res.status(500).send({ error: "An error occurred" });
     }
