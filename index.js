@@ -167,12 +167,17 @@ app.get('/donor',(req,res)=>{
 app.post('/donor',async(req,res)=>{
     const name = req.body.donor_name;
     const contact = req.body.contact
+    const db_contact = await Donor.findOne({where : {contact : contact}});
+    if(db_contact)
+    {
+        return res.render("NewDonorForm",{message : "Contact already exists"});
+    }
     await Donor.create({
         donor_name: name,
         contact: contact,
     });
-    const count = await Donor.count();
-    res.render("NewDonorForm",{id: count});
+    const id = await Donor.findOne({where : {contact : contact}});
+    res.render("NewDonorForm",{id: id.donor_id});
 })
 
 app.get('/donation',(req,res)=>{

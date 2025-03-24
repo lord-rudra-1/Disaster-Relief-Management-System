@@ -26,6 +26,9 @@
     <%if(locals.id){%>
         <script>alert("Donor is Successfully Resigistered and Your Donor ID is <%=id%>")</script>
     <%}%>
+    <%if(locals.message){%>
+        <script>alert("<%=message%>")</script>
+    <%}%>
 </body>
 
 </html>
