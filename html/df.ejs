@@ -6,6 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donations</title>
     <link rel="stylesheet" href="/public/donations.css">
+    <script>
+        function toggleFields(selectedType) {
+            const amountCheckbox = document.getElementById("donate_cash");
+            const resourceCheckbox = document.getElementById("donate_resource");
+
+            const amountField = document.getElementById("amount");
+            const categoryField = document.getElementById("category_id");
+            const quantityField = document.getElementById("quantity");
+
+            if (selectedType === "cash") {
+                resourceCheckbox.checked = false;
+                amountField.disabled = false;
+                categoryField.disabled = true;
+                quantityField.disabled = true;
+                categoryField.value = "";
+                quantityField.value = "";
+            } else if (selectedType === "resource") {
+                amountCheckbox.checked = false;
+                amountField.disabled = true;
+                categoryField.disabled = false;
+                quantityField.disabled = false;
+                amountField.value = "";
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -17,24 +42,29 @@
         <input type="number" name="donor_id" id="donor_id" placeholder="Enter Donor ID" required>
         <br>
 
-        <!-- Donation Type (User Input) -->
-        <label for="donation_type">Donation Type:</label>
-        <input type="text" name="donation_type" id="donation_type" placeholder="Enter Donation Type (Cash/Resource)" required>
+        <!-- Choose Donation Type -->
+        <label>Choose Donation Type:</label><br>
+        <input type="checkbox" id="donate_cash" name="donate_type" value="cash" onclick="toggleFields('cash')">
+        <label for="donate_cash">Donate Cash</label>
+
+        <input type="checkbox" id="donate_resource" name="donate_type" value="resource"
+            onclick="toggleFields('resource')">
+        <label for="donate_resource">Donate Resources</label>
         <br>
 
         <!-- Amount (User Input) -->
         <label for="amount">Amount:</label>
-        <input type="number" step="0.01" name="amount" id="amount" placeholder="Enter amount (or leave blank)">
+        <input type="number" step="0.01" name="amount" id="amount" placeholder="Enter amount" disabled>
         <br>
 
         <!-- Resource Category (User Input) -->
         <label for="category_id">Resource Category ID:</label>
-        <input type="number" name="category_id" id="category_id" placeholder="Enter Resource Category ID (or leave blank)">
+        <input type="number" name="category_id" id="category_id" placeholder="Enter Resource Category ID" disabled>
         <br>
 
         <!-- Quantity (User Input) -->
         <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" id="quantity" placeholder="Enter quantity (or leave blank)">
+        <input type="number" name="quantity" id="quantity" placeholder="Enter quantity" disabled>
         <br>
 
         <!-- Allocated To (User Input for Area ID) -->
