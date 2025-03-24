@@ -235,7 +235,7 @@ app.post('/donations', async (req, res) => {
             amount : amount,
             category_id : category_id,
             quantity : quantity,
-            allocated_to : quantity,
+            allocated_to : allocated_to,
         });
         res.redirect("/home"); 
     } catch (error) {
@@ -359,28 +359,6 @@ app.post('/volunteer_assign', async (req, res) => {
     }
 });
 
-// app.get("/3", async (req, res) => {
-//     try {
-//         const reliefEfforts = await relief_efforts.findAll({
-//             include: [
-//                 {
-//                     model: Volunteer,
-//                     attributes: ["volunteer_id", "name", "skills", "contact"],
-//                 },
-//                 {
-//                     model: AffectedArea,
-//                     attributes: ["area_id", "location", "disaster_type", "severity"],
-//                 }
-//             ]
-//         });
-
-//         res.json(reliefEfforts);
-//     } catch (error) {
-//         console.error("Error retrieving relief efforts:", error.message);
-//         res.status(500).json({ error: "Internal Server Error", details: error.message });
-//     }
-// });
-
 app.get('/4',async (req,res)=>{
     const donations = await Donation.findAll({
         where:{
@@ -394,7 +372,7 @@ app.get('/unassign-volunteer',(req,res)=>{
 })
 app.post('/unassign-volunteer',async (req,res)=>{
     try {
-        const { volunteer_id } = req.body; // Extract 'volunteer_id' (not 'id')
+        const { volunteer_id } = req.body; 
 
         if (!volunteer_id) {
             return res.status(400).send("Error: Volunteer ID is required.");
@@ -446,7 +424,27 @@ app.post('/add_affectedareas', async (req, res) => {
     }
 });
 
+app.get("/totalDonation",(req,res)=>{
+    res.render("totalDonation");
+})
 
+app.post("/totalDonation",async(req,res)=>{
+    const donor_id = req.body.Donor_id;
+    
+    try {
+        const Alldonation = await Donation.findAll({ where: { donor_id: donor_id } });
+
+        let totalDonation = 0;
+
+        for (let donation of Alldonation) {
+            totalDonation += donation.amount;  // Assuming 'amount' is the donation field
+        }
+
+        res.send({ totalDonation: totalDonation }); // Send total as JSON response
+    } catch (error) {
+        res.status(500).send({ error: "An error occurred" });
+    }
+})
 
 
 const PORT = process.env.PORT_SERVER;

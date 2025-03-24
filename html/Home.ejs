@@ -47,6 +47,10 @@
                     <h2>Affected Areas</h2>
                     <p>View and manage affected areas</p>
                 </a>
+                <a href="/totalDonation" class="card">
+                    <h2>Total Donation</h2>
+                    <p>Total donation of the donor</p>
+                </a>
                 <% if(locals.flag) { %>
                 <a href="/admin/dashboard" class="card"" >
                     <h2>Admin Dashboard</h2>
@@ -55,154 +59,6 @@
                 <% } %>
             </div>
         </div>
-
-        <% if (showTables) { %>
-        <div class="tables-container">
-            <div class="table-section">
-                <h2>Affected Areas</h2>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Location</th>
-                                <th>Disaster Type</th>
-                                <th>Severity</th>
-                                <th>Population</th>
-                                <th>Casualties</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% data.affectedAreas.forEach(area => { %>
-                            <tr>
-                                <td><%= area.location %></td>
-                                <td><%= area.disaster_type %></td>
-                                <td><%= area.severity %></td>
-                                <td><%= area.population %></td>
-                                <td><%= area.casualties %></td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="table-section">
-                <h2>Volunteers</h2>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Contact</th>
-                                <th>Skills</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% data.volunteers.forEach(volunteer => { %>
-                            <tr>
-                                <td><%= volunteer.name %></td>
-                                <td><%= volunteer.contact %></td>
-                                <td><%= volunteer.skills %></td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="table-section">
-                <h2>Donors</h2>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Contact</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% data.donors.forEach(donor => { %>
-                            <tr>
-                                <td><%= donor.donor_name %></td>
-                                <td><%= donor.contact %></td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="table-section">
-                <h2>Donations</h2>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Donor</th>
-                                <th>Donation Type</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% data.donations.forEach(donation => { %>
-                            <tr>
-                                <td><%= donation.donor_id %></td>
-                                <td><%= donation.donation_type %></td>
-                                <td><%= donation.amount ? donation.amount : 'N/A' %></td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="table-section">
-                <h2>Resources</h2>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Category</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% data.resources.forEach(resource => { %>
-                            <tr>
-                                <td><%= resource.category_id %></td>
-                                <td><%= resource.quantity %></td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="table-section">
-                <h2>Volunteer Assignments</h2>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Volunteer</th>
-                                <th>Task</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% data.assignments.forEach(assignment => { %>
-                            <tr>
-                                <td><%= assignment.volunteer_id %></td>
-                                <td><%= assignment.task %></td>
-                                <td><%= assignment.status %></td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <% } %>
     </main>
 
     <!-- Footer -->
