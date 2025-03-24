@@ -227,16 +227,16 @@ app.post('/add_resource', async (req, res) => {
 
 app.post('/donations', async (req, res) => {
     const donor_id = req.body.donor_id;
-    const donation_type = req.body.donation_type;
+    const donate_type = req.body.donate_type;
     const amount = req.body.amount;
     const category_id = req.body.category_id;
     const quantity = req.body.quantity;
-    const allocated_to = req.body.quantity;
-
+    const allocated_to = req.body.allocated_to;
+    console.log(donor_id + donate_type + amount + category_id + quantity + allocated_to);
     try {
         await Donation.create({
             donor_id : donor_id,
-            donation_type : donation_type,
+            donation_type : donate_type,
             amount : amount,
             category_id : category_id,
             quantity : quantity,

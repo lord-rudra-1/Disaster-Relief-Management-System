@@ -42,7 +42,8 @@
         }
 
         input[type="number"],
-        input[type="text"] {
+        input[type="text"],
+        select {
             padding: 10px;
             margin-bottom: 15px;
             width: calc(100% - 20px);
@@ -55,23 +56,6 @@
         input:disabled {
             background: #f0f0f0;
             cursor: not-allowed;
-        }
-
-        .checkbox-group {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            font-weight: normal;
-            cursor: pointer;
-        }
-
-        .checkbox-group input {
-            margin-right: 8px;
         }
 
         button {
@@ -91,27 +75,30 @@
     </style>
 
     <script>
-        function toggleFields(selectedType) {
-            const amountCheckbox = document.getElementById("donate_cash");
-            const resourceCheckbox = document.getElementById("donate_resource");
-
+        function toggleFields() {
+            const donationType = document.getElementById("donate_type").value;
             const amountField = document.getElementById("amount");
             const categoryField = document.getElementById("category_id");
             const quantityField = document.getElementById("quantity");
 
-            if (selectedType === "cash") {
-                resourceCheckbox.checked = false;
+            if (donationType === "Cash") {
                 amountField.disabled = false;
                 categoryField.disabled = true;
                 quantityField.disabled = true;
                 categoryField.value = "";
                 quantityField.value = "";
-            } else if (selectedType === "resource") {
-                amountCheckbox.checked = false;
+            } else if (donationType === "Resource") {
                 amountField.disabled = true;
                 categoryField.disabled = false;
                 quantityField.disabled = false;
                 amountField.value = "";
+            } else {
+                amountField.disabled = true;
+                categoryField.disabled = true;
+                quantityField.disabled = true;
+                amountField.value = "";
+                categoryField.value = "";
+                quantityField.value = "";
             }
         }
     </script>
@@ -128,18 +115,13 @@
             <label for="donor_id">Donor ID:</label>
             <input type="number" name="donor_id" id="donor_id" placeholder="Enter Donor ID" required>
 
-            <!-- Donation Type -->
-            <label>Choose Donation Type:</label>
-            <div class="checkbox-group">
-                <label>
-                    <input type="checkbox" id="donate_cash" name="donate_type" value="cash" onclick="toggleFields('cash')">
-                    Cash
-                </label>
-                <label>
-                    <input type="checkbox" id="donate_resource" name="donate_type" value="resource" onclick="toggleFields('resource')">
-                    Resources
-                </label>
-            </div>
+            <!-- Donation Type Dropdown -->
+            <label for="donate_type">Choose Donation Type:</label>
+            <select id="donate_type" name="donate_type" onchange="toggleFields()" required>
+                <option value="" selected disabled>-- Select Donation Type --</option>
+                <option value="Cash">Cash</option>
+                <option value="Resource">Resources</option>
+            </select>
 
             <!-- Amount -->
             <label for="amount">Amount:</label>
