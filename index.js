@@ -440,7 +440,7 @@ app.post("/totalDonation",async(req,res)=>{
             totalDonation += donation.amount;  
         }
 
-        res.send({ totalDonation: totalDonation }); 
+        res.render("totalDonation",{ donation: totalDonation }); 
     } catch (error) {
         res.status(500).send({ error: "An error occurred" });
     }

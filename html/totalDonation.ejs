@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
             align-items: center;
             height: 100vh;
         }
+
         .form-container {
             background: white;
             padding: 20px;
@@ -23,65 +25,82 @@
             width: 100%;
             max-width: 400px;
         }
+
         h2 {
             text-align: center;
             color: #333;
         }
+
         p {
             text-align: center;
             color: #666;
             margin-bottom: 20px;
         }
+
         label {
             font-weight: bold;
             margin-top: 10px;
             display: block;
         }
-        input, button {
+
+        input,
+        button {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         button {
             background-color: #dc3545;
             color: white;
             cursor: pointer;
             margin-top: 15px;
         }
+
         button:hover {
             background-color: #c82333;
         }
+
         .back-link {
             text-align: center;
             margin-top: 15px;
         }
+
         .back-link a {
             color: #007bff;
             text-decoration: none;
         }
+
         .back-link a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
 
     <div class="form-container">
-        <h2>Disable Affected Area</h2>
-        <p>Enter the ID of the affected area you want to disable</p>
-        
+        <h2>Total Donation By Individual</h2>
+        <p>Enter the ID of the Donor</p>
+
         <form action="/totalDonation" method="POST">
             <label for="DonorID">Donor ID:</label>
             <input type="text" id="donor_id" name="Donor_id" required>
             <button type="submit">submit</button>
         </form>
-        
-        <div class="back-link">
+        <%if(locals.donation){%>
+        <div class="result-section">
+        <h2>Result</h2>
+        <br>
+        <h3>Donations: <%=donation%> </h3>
+        </div>
+         <div class="back-link">
             <a href="/admin/dashboard">Back to Dashboard</a>
         </div>
-    </div>
-
+        </div>
+        <%}%>
 </body>
+
 </html>
