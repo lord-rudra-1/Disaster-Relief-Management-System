@@ -43,6 +43,7 @@
         </tr>
         <% affectedAreas.forEach(area => { %>
         <tr>
+            <% if(area.status == "Active"){ %>
             <td><%= area.location %></td>
             <td><%= area.disaster_type %></td>
             <td><%= area.severity %></td>
@@ -50,6 +51,7 @@
             <td><%= area.casualties %></td>
             <td><%= area.immediate_needs %></td>
             <td><%= area.status %></td>
+            <% } %>
         </tr>
         <% }) %>
     </table>
