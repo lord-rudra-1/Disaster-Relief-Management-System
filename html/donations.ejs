@@ -142,6 +142,11 @@
             <button type="submit">Submit Donation</button>
         </form>
     </div>
+    <% if(locals.message){ %>
+        <script>
+            alert('<%= message %>');
+        </script>
+    <% } %>
 
 </body>
 

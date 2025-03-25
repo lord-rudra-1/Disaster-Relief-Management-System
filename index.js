@@ -65,7 +65,7 @@ app.get('/disable-affected-area',(req,res)=>{
 app.post('/disable-affected-area',async (req,res)=>{
     const area_id = req.body.area_id;
     await AffectedArea.update({status : "Deactive"},{where : {area_id : area_id}});
-    res.redirect(302, "/admin/dashboard");
+    res.render("DisableAffectedArea",{message : "Affected area disabled successfully"});
 })
 
 app.get('/admin/dashboard', async (req, res) => {
@@ -242,7 +242,7 @@ app.post('/donations', async (req, res) => {
             quantity : quantity,
             allocated_to : allocated_to,
         });
-        res.redirect("/home"); 
+        res.render('donations',{message : "Donation created successfully"});
     } catch (error) {
         console.error('Error adding resource:', error);
         res.status(500).send('Error adding resource');
@@ -295,7 +295,7 @@ app.post('/relief_effort', async (req, res) => {
             { where: { volunteer_id: volunteer_id } }
         );
 
-        res.redirect("/admin/dashboard");  // Redirect to resources page after adding
+        res.render('relief-effortForm',{message : "Relief effort created successfully"});
     } catch (error) {
         console.error('Error adding resource:', error);
         res.status(500).send('Error adding resource');
