@@ -39,6 +39,7 @@
             <th>Population</th>
             <th>Casualties</th>
             <th>Immediate Needs</th>
+            <th>Status</th>
         </tr>
         <% affectedAreas.forEach(area => { %>
         <tr>
@@ -48,6 +49,7 @@
             <td><%= area.population %></td>
             <td><%= area.casualties %></td>
             <td><%= area.immediate_needs %></td>
+            <td><%= area.status %></td>
         </tr>
         <% }) %>
     </table>

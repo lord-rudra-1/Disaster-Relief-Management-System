@@ -251,7 +251,7 @@ app.post('/donations', async (req, res) => {
 
 app.get('/affected-area', async (req, res) => {
     try {
-        const affectedAreas = await AffectedArea.findAll();
+        const affectedAreas = await AffectedArea.findAll({where : {status : "Active"}});
         res.render('affectedAreas', { affectedAreas });
     } catch (error) {
         console.error("Error fetching affected areas:", error);
